@@ -1,0 +1,1307 @@
+html, body {
+  background-color: hsla( 090, 050%, 025%, 1.0 );
+  color: white;
+  font-family: 'MS PGothic';
+  font-size: 0;
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+}
+body > * {
+  font-size: 16px;
+}
+
+option-container {
+
+  position: absolute;
+  display: flex;
+  bottom: 1vmin;
+  width: 100%;
+  height: 10vmin;
+  font-size: 5vmin;
+
+  option-item {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border: 0 solid white;
+    border-width: 1px 0.5px;
+
+    &:hover {
+      background: gold;
+      color: black;
+      cursor: pointer;
+    }
+
+    &:before {
+      content: attr( data-value );
+    }
+  }
+}
+
+default-style, animal-item {
+
+  position: absolute;
+  display: block;
+  z-index: 10;
+
+  height: var( --size );
+  width: var( --size );
+
+  margin-top: calc( var( --size ) * -1 );
+  margin-left: calc( var( --size ) * -0.5 );
+
+  *, *:before, *:after {
+
+    --width: 100%;
+    --posX: 0;
+
+    --minP: calc( 0% - var( --width ) );
+    --maxP: 100%;
+    --difP: calc( var( --maxP ) - var( --minP ) );
+    --lefP: calc( ( var( --posX ) * var( --difP ) ) + var( --minP ) );
+
+    --minB: 0%;
+    --maxB: calc( 100% - var( --width ) );
+    --difB: calc( var( --maxB ) - var( --minB ) );
+    --lefB: calc( ( var( --posX ) * var( --difB ) ) + var( --minB ) );
+
+    --zindexF: calc( var( --isFaceView ) * 10 );
+    --zindexB: calc( var( --isFaceView ) * -10 );
+
+    width: var( --width );
+
+    display: block;
+    position: absolute;
+
+    background-color: inherit;
+
+    transition-duration: 500ms;
+    transition-property: all;
+  }
+
+  talk-item {
+
+    bottom: 110%;
+    left: 12.5%;
+
+    width: 75%;
+    height: 75%;
+
+    background-color: white;
+    border-radius: 100vmax;
+
+    opacity: 0;
+
+    color: black;
+
+    &:before {
+
+      content: '';
+
+      top: 80%;
+      left: 37.5%;
+
+      z-index: -1;
+
+      width: 25%;
+      height: 25%;
+
+      transform: rotateZ( 45deg );
+      border-radius: 0;
+    }
+
+    &:after {
+
+      top: calc( 50% - 0.5em );
+      width: 100%;
+
+      text-align: center;
+      background-color: transparent;
+    }
+  }
+}
+
+test-rules, animal-item {
+
+  --size: calc( ( 100vw / 8 ) );
+
+  margin-left: initial;
+  margin-top: calc( 50vh - ( var( --size ) / 2 ) );
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  z-index: 10;
+
+  border: 1px dotted hsla( 270, 050%, 050%, 1.0 );
+
+  &:before {
+    content: attr( data-face );
+  }
+}
+
+//====================================================================
+//  base.scss
+//====================================================================
+
+animal-item.pig {
+
+  --hue: 015;
+  --sat: 075%;
+  --lum: 075%;
+
+  --color: hsla( var( --hue ), var( --sat ), var( --lum ), 1.0 );
+
+  body-item {
+
+    top: 25%;
+    left: var( --lefB );
+
+    height: 40%;
+    --width: 25%;
+
+    background-color: var( --color );
+  }
+
+  limb-item {
+
+    top: 100%;
+    left: var( --lefB );
+
+    height: 45%;
+    --width: 35%;
+
+    &:before {
+
+      content: "";
+
+      top: 100%;
+
+      height: 25%;
+      width: 100%;
+
+      filter: brightness( 0.4 );
+    }
+  }
+
+  rump-item {
+
+    left: var( --lefP );
+    bottom: 5%;
+    z-index: var( --zindexB );
+
+    height: 100%;
+    --width: 140%;
+
+    filter: brightness( 0.95 ) saturate( 1.05 );
+
+    tail-item {
+
+      --thick: calc( var( --size ) / 50 );
+
+      left: var( --lefP );
+      top: 0;
+
+      height: 30%;
+      --width: 20%;
+
+      border: var( --thick ) solid var( --color );
+      border-bottom-width: 0;
+      border-left-width: 0;
+
+      &, &:before, &:after {
+
+        content: "";
+
+        box-sizing: border-box;
+        background: transparent;
+      }
+
+      &:after {
+
+        bottom: 0;
+        right: -2.5%;
+
+        width: 50%;
+        height: 0;
+
+        border: 0 solid var( --color );
+        border-bottom-width: var( --thick );
+      }
+
+      &:before {
+
+        top: 25%;
+        right: -100%;
+
+        height: 75%;
+        width: 175%;
+
+        border: var( --thick ) solid var( --color );
+        border-bottom-width: 0;
+      }
+    }
+
+    limb-item {
+      height: 50%;
+      --width: 25%;
+    }
+  }
+
+  neck-item {
+
+    left: var( --lefP );
+    top: 10%;
+    z-index: var( --zindexF );
+
+    height: 75%;
+    --width: 100%;
+
+    head-item, face-item {
+
+      top: 0;
+      left: 0;
+
+      height: 100%;
+      width: 100%;
+    }
+
+    ears-item {
+
+      --separation: 0;
+
+      bottom: 100%;
+
+      height: 30%;
+      width: 30%;
+
+      &:nth-of-type( 1 ) { left: var( --separation ); }
+      &:nth-of-type( 2 ) { right: var( --separation ); }
+    }
+
+    nose-item {
+
+      --separation: 15%;
+
+      top: 50%;
+      left: var( --lefB );
+      z-index: var( --zindexF );
+
+      height: 20%;
+      --width: 30%;
+
+      filter: brightness( 0.9 ) saturate( 2.0 );
+
+      &:before, &:after {
+
+        content: "";
+        top: 40%;
+
+        width: 20%;
+        height: 20%;
+
+        filter: brightness( 0.5 );
+      }
+      &:before { left: var( --separation ); }
+      &:after { right: var( --separation ); }
+    }
+
+    eyes-item {
+
+      --separation: 10%;
+      --thick: calc( var( --size ) / 50 );
+
+      top: 35%;
+
+      height: var( --thick );
+      width: var( --thick );
+
+      filter: brightness( 0.25 );
+
+      &:nth-of-type( 1 ) { left: var( --separation ); }
+      &:nth-of-type( 2 ) { right: var( --separation ); }
+    }
+  }
+}
+
+//====================================================================
+//  direction.scss
+//====================================================================
+
+animal-item.pig {
+
+  &[ data-face = '000' ], &[ data-face = '180' ] {
+
+    --isFaceView: -1;
+
+    body-item { --posX: 0.5; }
+    nose-item { --posX: 0.5; }
+
+    rump-item { --posX: 0.5; }
+    tail-item { --posX: 0.5; }
+
+    neck-item { --posX: 0.5; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 90%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 100%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+  }
+
+  &[ data-face = '180' ] {
+
+    --isFaceView: 1;
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 100%; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 90%; }
+  }
+
+  &[ data-face = '045' ], &[ data-face = '135' ] {
+
+    --isFaceView: -1;
+
+    body-item { --posX: 0.5; }
+    nose-item { --posX: 0.5; }
+
+    rump-item { --posX: 0.25; }
+    tail-item { --posX: 0; }
+
+    neck-item { --posX: 0.75; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 90%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 100%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+  }
+
+  &[ data-face = '135' ] {
+
+    --isFaceView: 1;
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 100%; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 90%; }
+  }
+
+  &[ data-face = '090' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.625; }
+    nose-item { --posX: 1; }
+
+    rump-item { --posX: 0; }
+    tail-item { --posX: -0.05; }
+
+    neck-item { --posX: 1; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.5; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 1; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.5; }
+  }
+
+  &[ data-face = '225' ], &[ data-face = '315'] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.5; }
+    nose-item { --posX: 0.5; }
+
+    rump-item { --posX: 0.75; }
+    tail-item { --posX: 1; }
+
+    neck-item { --posX: 0.25; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 100%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 90%; --posX: 0.9; }
+  }
+
+  &[ data-face = '315' ] {
+
+    --isFaceView: -1;
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 90%; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 100%; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; }
+  }
+
+  &[ data-face = '270' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.375; }
+    nose-item { --posX: 0; }
+
+    rump-item { --posX: 1; }
+    tail-item { --posX: 1; }
+
+    neck-item { --posX: 0; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.5; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.5; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 1; }
+  }
+}
+
+//====================================================================
+//  state.scss
+//====================================================================
+
+animal-item.pig.munch {
+  neck-item {
+    top: 50%;
+  }
+}
+
+animal-item.pig.heart {}
+animal-item.pig.scoot {}
+
+animal-item.pig.sleep {
+  body-item {
+    top: 50%;
+  }
+  limb-item {
+    height: 20%;
+  }
+  neck-item {
+    top: 40%;
+  }
+}
+
+animal-item.emu {
+
+  --hue: 045;
+  --sat: 025%;
+  --lum: 015%;
+
+  --color: hsla( var( --hue ), var( --sat ), var( --lum ), 1.0 );
+
+  body-item {
+
+    top: 40%;
+    left: var( --lefB );
+
+    height: 30%;
+    --width: 75%;
+
+    > *, &:before, &:after {
+      background-color: var( --color );
+    }
+
+    &:before, &:after {
+
+      content: '';
+
+      bottom: 0;
+      left: var( --lefB );
+    }
+
+    &:before { // body
+      height: 100%;
+      --width: 60%;
+    }
+
+    &:after { // chest
+      bottom: 25%;
+      height: 75%;
+      --width: 20%;
+    }
+
+  }
+
+  body-item > limb-item {
+
+    top: 35%;
+    left: var( --lefP );
+    z-index: var( --zindexF );
+
+    height: 65%;
+    --width: 35%;
+
+    filter: brightness( 1.5 );
+
+    &:before {
+
+      content: '';
+
+      top: 100%;
+
+
+      height: 25%;
+      --width: 35%;
+
+      filter: brightness( 0.75 );
+    }
+
+    &:nth-of-type( 1 ):before { left: 0; }
+    &:nth-of-type( 2 ):before { right: 0; }
+  }
+
+  rump-item {
+
+    top: 25%;
+    left: var( --lefB );
+    z-index: var( --zindexB );
+
+    height: 75%;
+    --width: 40%;
+
+    filter: brightness( 0.9 );
+
+    tail-item {
+
+      top: 25%;
+      left: var( --lefP );
+
+      height: 100%;
+      --width: 35%;
+
+      filter: brightness( 1.5 );
+    }
+
+    > limb-item {
+
+      top: 100%;
+      left: var( --lefB );
+
+      height: 50%;
+      --width: 10%;
+
+      filter: brightness( 3 ) saturate( 1.5 );
+
+      &:after {
+
+        content: '';
+
+        top: 100%;
+        left: var( --lefP );
+
+        height: 100%;
+        width: 100%;
+
+      }
+
+      &:before {
+
+        content: '';
+
+        top: 200%;
+        left: var( --lefP );
+
+        height: 25%;
+        --width: 200%;
+
+        filter: brightness( 0.75 );
+      }
+
+      &:nth-of-type( 1 ) {
+        &:before { left: var( --lefP ); }
+        &:after { left: var( --lefP ); }
+      }
+
+      &:nth-of-type( 2 ) {
+        &:before { left: var( --lefP ); }
+        &:after { left: var( --lefP ); }
+      }
+    }
+  }
+
+  neck-item {
+
+    bottom: 75%;
+    left: var( --lefB );
+    z-index: var( --zindexF );
+
+    height: 75%;
+    --width: 15%;
+
+    filter: brightness( 0.95 );
+
+    head-item {
+
+      bottom: 100%;
+      left: var( --lefB );
+      z-index: var( --zindexF );
+
+      height: 100%;
+      --width: 75%;
+
+      filter: brightness( 0.50 );
+
+      face-item {
+
+        top: 0%;
+        left: var( --lefB );
+        z-index: var( --zindexF );
+
+        height: 35%;
+        --width: 120%;
+
+        filter: brightness( 2 );
+
+        nose-item {
+
+          top: 50%;
+          left: var( --lefP );
+          z-index: var( --zindexF );
+
+          height: 50%;
+          --width: 50%;
+
+          filter: brightness( 0.5 );
+
+        }
+      }
+    }
+
+    ears-item {}
+
+    eyes-item {
+
+      --separation: 20%;
+      --thick: calc( var( --size ) / 90 );
+
+      top: 20%;
+      z-index: -10;
+
+      height: var( --thick );
+      width: var( --thick );
+
+      filter: brightness( 2.0 ) saturate( 2.0 ) hue-rotate( 330deg );
+
+      &:nth-of-type( 1 ) { left: var( --separation ); }
+      &:nth-of-type( 2 ) { right: var( --separation ); }
+    }
+  }
+}
+
+//====================================================================
+//  direction.scss
+//====================================================================
+
+animal-item.emu {
+
+  &[ data-face = '000' ], &[ data-face = '180' ] {
+
+    --isFaceView: -1;
+
+    body-item { --posX: 0.5; }
+    body-item:after { --posX: 0.5; }
+    body-item:before { --posX: 0.5; }
+    nose-item { --posX: 0.5; }
+
+    rump-item { --posX: 0.5; }
+    tail-item { --posX: 0.5; }
+
+    neck-item { --posX: 0.5; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { --width: 15%; --posX: 0.25; }
+    body-item > limb-item:nth-of-type( 2 ) { --width: 15%; --posX: 0.75; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 100%; --posX: 0.25; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.75; }
+
+    rump-item > limb-item:nth-of-type( 1 ):after { --posX: 1; }
+    rump-item > limb-item:nth-of-type( 2 ):after { --posX: 0; }
+
+    rump-item > limb-item:nth-of-type( 1 ):before { --posX: 0.5; }
+    rump-item > limb-item:nth-of-type( 2 ):before { --posX: 0.5; }
+  }
+}
+
+animal-item.emu {
+
+  &[ data-face = '000' ] {
+
+    face-item > * { display: none; }
+  }
+
+  &[ data-face = '180' ] {
+
+    --isFaceView: 1;
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 90%; }
+  }
+
+  &[ data-face = '045' ], &[ data-face = '135' ] {
+
+    --isFaceView: -1;
+
+    body-item { --posX: 0.5; }
+    body-item:after { --posX: 0.75; }
+    body-item:before { --posX: 0.5; }
+    nose-item { --posX: 0.75; }
+
+    rump-item { --posX: 0.25; }
+    tail-item { --posX: 0; }
+
+    neck-item { --posX: 0.75; }
+    head-item { --posX: 0.75; }
+    face-item { --posX: 0; }
+
+    body-item > limb-item:nth-of-type( 1 ) { z-index: -10; --posX: 0.4; }
+    body-item > limb-item:nth-of-type( 2 ) { z-index: 10; --posX: 0.6; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { --posX: 1; }
+    rump-item > limb-item:nth-of-type( 2 ) { --posX: 0.75; }
+
+    rump-item > limb-item:nth-of-type( 1 ):after { --posX: 1; }
+    rump-item > limb-item:nth-of-type( 2 ):after { --posX: 1; }
+
+    rump-item > limb-item:nth-of-type( 1 ):before { --posX: 1; }
+    rump-item > limb-item:nth-of-type( 2 ):before { --posX: 1; }
+  }
+
+  &[ data-face = '045' ] {
+
+    eyes-item { display: none; }
+    nose-item { --posX: 1; --width: 25%; }
+  }
+
+  &[ data-face = '135' ] {
+
+    --isFaceView: 1;
+
+    body-item > limb-item:nth-of-type( 1 ) { z-index: 10; }
+    body-item > limb-item:nth-of-type( 2 ) { z-index: -10; }
+  }
+
+  &[ data-face = '090' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.5; }
+    body-item:after { --posX: 1; }
+    body-item:before { --posX: 0.5; }
+    nose-item { --posX: 1; }
+
+    rump-item { --posX: 0; }
+    tail-item { --posX: 0; }
+
+    neck-item { --posX: 1; }
+    head-item { --posX: 1; }
+    face-item { --posX: 0; }
+
+    body-item > limb-item:nth-of-type( 1 ) { z-index: 10; --posX: 0.5; }
+    body-item > limb-item:nth-of-type( 2 ) { z-index: -10; --posX: 0.5; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { --posX: 1; }
+    rump-item > limb-item:nth-of-type( 2 ) { --posX: 0.75; }
+
+    rump-item > limb-item:nth-of-type( 1 ):after { --posX: 1; }
+    rump-item > limb-item:nth-of-type( 2 ):after { --posX: 1; }
+
+    rump-item > limb-item:nth-of-type( 1 ):before { --posX: 1; }
+    rump-item > limb-item:nth-of-type( 2 ):before { --posX: 1; }
+  }
+
+  &[ data-face = '225' ], &[ data-face = '315' ] {
+
+    --isFaceView: -1;
+
+    body-item { --posX: 0.5; }
+    body-item:after { --posX: 0.25; }
+    body-item:before { --posX: 0.5; }
+    nose-item { --posX: 0.25; }
+
+    rump-item { --posX: 0.75; }
+    tail-item { --posX: 1; }
+
+    neck-item { --posX: 0.25; }
+    head-item { --posX: 0.25; }
+    face-item { --posX: 0; }
+
+    body-item > limb-item:nth-of-type( 1 ) { z-index: -10; --posX: 0.6; }
+    body-item > limb-item:nth-of-type( 2 ) { z-index: 10; --posX: 0.4; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { --posX: 0; }
+    rump-item > limb-item:nth-of-type( 2 ) { --posX: 0.25; }
+
+    rump-item > limb-item:nth-of-type( 1 ):after { --posX: 0; }
+    rump-item > limb-item:nth-of-type( 2 ):after { --posX: 0; }
+
+    rump-item > limb-item:nth-of-type( 1 ):before { --posX: 0; }
+    rump-item > limb-item:nth-of-type( 2 ):before { --posX: 0; }
+  }
+
+  &[ data-face = '315' ] {
+
+    --isFaceView: 1;
+
+    eyes-item { display: none; }
+    nose-item { --posX: 0; --width: 25%; }
+
+    body-item > limb-item:nth-of-type( 1 ) { z-index: 10; }
+    body-item > limb-item:nth-of-type( 2 ) { z-index: -10; }
+  }
+
+  &[ data-face = '270' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.5; }
+    body-item:after { --posX: 0; }
+    body-item:before { --posX: 0.5; }
+    nose-item { --posX: 0; }
+
+    rump-item { --posX: 1; }
+    tail-item { --posX: 1; }
+
+    neck-item { --posX: 0; }
+    head-item { --posX: 0; }
+    face-item { --posX: 1; }
+
+    body-item > limb-item:nth-of-type( 1 ) { z-index: 10; --posX: 0.5; }
+    body-item > limb-item:nth-of-type( 2 ) { z-index: -10; --posX: 0.5; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { --posX: 0; }
+    rump-item > limb-item:nth-of-type( 2 ) { --posX: 0.25; }
+
+    rump-item > limb-item:nth-of-type( 1 ):after { --posX: 0; }
+    rump-item > limb-item:nth-of-type( 2 ):after { --posX: 0; }
+
+    rump-item > limb-item:nth-of-type( 1 ):before { --posX: 0; }
+    rump-item > limb-item:nth-of-type( 2 ):before { --posX: 0; }
+  }
+
+  &[ data-face = '' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.375; }
+    nose-item { --posX: 0.25; }
+
+    rump-item { --posX: 1; }
+    tail-item { --posX: 1; }
+
+    neck-item { --posX: 0; }
+    head-item { --posX: 1; }
+    face-item { --posX: -0.25; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+  }
+}
+
+//====================================================================
+//  state.scss
+//====================================================================
+
+animal-item.emu.munch {
+  neck-item {
+    bottom: -20%;
+  }
+  head-item {
+    bottom: -50%;
+  }
+  face-item {
+    top: 100%;
+  }
+}
+
+animal-item.emu.heart {}
+animal-item.emu.scoot {}
+
+animal-item.emu.sleep {
+  body-item {
+    top: 50%;
+  }
+  limb-item {
+    height: 20%;
+  }
+  neck-item {
+    bottom: 30%;
+  }
+}
+
+animal-item.alpaca {
+
+  --hue: 030;
+  --sat: 090%;
+  --lum: 085%;
+
+  --color: hsla( var( --hue ), var( --sat ), var( --lum ), 1.0 );
+
+  body-item {
+
+    top: 40%;
+    left: var( --lefB );
+
+    height: 30%;
+    --width: 30%;
+
+    background-color: var( --color );
+  }
+
+  limb-item {
+
+    top: 100%;
+    left: var( --lefB );
+
+    height: 80%;
+    --width: 20%;
+
+    &:before {
+      content: "";
+      width: 150%;
+      height: 50%;
+    }
+
+    &:after {
+
+      content: "";
+
+      top: 100%;
+
+      height: 25%;
+      width: 75%;
+
+      filter: brightness( 0.5 );
+    }
+
+    &:nth-of-type( 1 ) {
+      &:before { left: 0; }
+      &:after { right: 0; }
+    }
+
+    &:nth-of-type( 2 ) {
+      &:before { right: 0; }
+      &:after { left: 0; }
+    }
+  }
+
+  rump-item {
+
+    top: 25%;
+    left: var( --lefP );
+    z-index: var( --zindexB );
+
+    height: 75%;
+    --width: 75%;
+
+    filter: brightness( 0.9 );
+
+    tail-item {
+
+      --thick: calc( var( --size ) / 50 );
+      --maxP: 75%;
+      --minP: -10%;
+      left: var( --lefP );
+      top: -10%;
+
+      height: 35%;
+      --width: 35%;
+    }
+
+    limb-item {
+      height: 105%;
+    }
+  }
+
+  neck-item {
+
+    bottom: 65%;
+    left: var( --lefB );
+    z-index: var( --zindexF );
+
+    height: 150%;
+    --width: 65%;
+
+    filter: brightness( 0.95 );
+
+    head-item {
+
+      top: 0%;
+      left: var( --lefB );
+
+      height: 50%;
+      --width: 110%;
+
+      face-item {
+
+        top: 50%;
+        left: var( --lefB );
+        z-index: var( --zindexF );
+
+        height: 50%;
+        --width: 60%;
+
+        filter: brightness( 1.1 );
+      }
+    }
+
+    ears-item {
+
+      --separation: 5%;
+
+      bottom: 75%;
+      z-index: var( --zindexF );
+
+      height: 75%;
+      --width: 30%;
+
+      filter: brightness( 0.5 );
+
+      &:nth-of-type( 1 ) { left: var( --separation ); }
+      &:nth-of-type( 2 ) { right: var( --separation ); }
+    }
+
+    nose-item {
+
+      --thick: calc( var( --size ) / 150 );
+      --separation: calc( 50% - ( var( --thick ) / 2 ) );
+
+      top: 55%;
+      left: var( --lefB );
+      z-index: var( --zindexF );
+
+      height: 15%;
+      --width: 20%;
+
+      filter: brightness( 0.4 );
+
+      &:before, &:after {
+
+        content: "";
+        top: 100%;
+
+        width: 75%;
+        height: 75%;
+
+        filter: brightness( 0.5 );
+
+        background-color: transparent;
+        border: var( --thick ) solid var( --color );
+        border-top-width: 0;
+
+      }
+      &:before { left: var( --separation ); }
+      &:after { right: var( --separation ); }
+    }
+
+    eyes-item {
+
+      --separation: 10%;
+      --thick: calc( var( --size ) / 60 );
+
+      top: 10%;
+
+      height: var( --thick );
+      width: var( --thick );
+
+      filter: brightness( 0.25 );
+
+      &:nth-of-type( 1 ) { left: var( --separation ); }
+      &:nth-of-type( 2 ) { right: var( --separation ); }
+    }
+  }
+}
+
+//====================================================================
+//  direction.scss
+//====================================================================
+
+animal-item.alpaca {
+
+  &[ data-face = '000' ], &[ data-face = '180' ] {
+
+    --isFaceView: -1;
+
+    body-item { --posX: 0.5; }
+    nose-item { --posX: 0.5; }
+
+    rump-item { --posX: 0.5; }
+    tail-item { --posX: 0.5; }
+
+    neck-item { --posX: 0.5; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 90%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 100%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+  }
+
+  &[ data-face = '180' ] {
+
+    --isFaceView: 1;
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 100%; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 90%; }
+  }
+
+  &[ data-face = '045' ], &[ data-face = '135' ] {
+
+    --isFaceView: -1;
+
+    body-item { --posX: 0.5; }
+    nose-item { --posX: 0.5; }
+
+    rump-item { --posX: 0.25; }
+    tail-item { --posX: 0; }
+
+    neck-item { --posX: 0.75; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 90%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 100%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+  }
+
+  &[ data-face = '135' ] {
+
+    --isFaceView: 1;
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 100%; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 90%; }
+  }
+
+  &[ data-face = '090' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.625; }
+    nose-item { --posX: 0.75; }
+
+    rump-item { --posX: 0; }
+    tail-item { --posX: 0; }
+
+    neck-item { --posX: 1; }
+    head-item { --posX: 0; }
+    face-item { --posX: 1.25; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+  }
+
+  &[ data-face = '225' ], &[ data-face = '315' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.5; }
+    nose-item { --posX: 0.5; }
+
+    rump-item { --posX: 0.75; }
+    tail-item { --posX: 1; }
+
+    neck-item { --posX: 0.25; }
+    head-item { --posX: 0.5; }
+    face-item { --posX: 0.5; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 100%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 90%; --posX: 0.9; }
+  }
+
+  &[ data-face = '315' ] {
+
+    --isFaceView: -1;
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 90%; }
+    rump-item > limb-item:nth-of-type( 1 ) { top: 100%; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; }
+  }
+
+  &[ data-face = '270' ] {
+
+    --isFaceView: 1;
+
+    body-item { --posX: 0.375; }
+    nose-item { --posX: 0.25; }
+
+    rump-item { --posX: 1; }
+    tail-item { --posX: 1; }
+
+    neck-item { --posX: 0; }
+    head-item { --posX: 1; }
+    face-item { --posX: -0.25; }
+
+    body-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    body-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+
+    rump-item > limb-item:nth-of-type( 1 ) { top: 90%; --posX: 0.1; }
+    rump-item > limb-item:nth-of-type( 2 ) { top: 100%; --posX: 0.9; }
+  }
+}
+
+//====================================================================
+//  state.scss
+//====================================================================
+
+animal-item.alpaca.munch {
+  neck-item {
+    bottom: -75%;
+  }
+  head-item {
+    top: 65%;
+  }
+}
+
+animal-item.alpaca.heart {}
+animal-item.alpaca.scoot {}
+
+animal-item.alpaca.sleep {
+  body-item {
+    top: 60%;
+  }
+  limb-item {
+    height: 20%;
+  }
+  neck-item {
+    bottom: 0;
+  }
+  head-item {
+    top: 25%;
+  }
+}
