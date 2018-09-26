@@ -1,0 +1,26 @@
+animal-item.cow.munch {
+  neck-item {
+    bottom: -25%;
+  }
+  head-item {
+    top: 100%;
+  }
+}
+
+animal-item.cow.heart {}
+animal-item.cow.scoot {}
+
+animal-item.cow.sleep {
+  body-item {
+    top: 60%;
+  }
+  limb-item {
+    height: 20%;
+  }
+  neck-item {
+    bottom: 0;
+  }
+  head-item {
+    top: 25%;
+  }
+}
