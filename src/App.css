@@ -671,7 +671,7 @@ animal-item.cow {
         right: var(--separation); }
     animal-item.cow neck-item eyes-item {
       --separation: 5%;
-      --thick: calc( var( --sizeStatic ) / 30 );
+      --thick: calc( var( --sizeStatic ) / 15 );
       top: 10%;
       height: var(--thick);
       width: var(--thick);
@@ -1612,7 +1612,7 @@ animal-item.cow.munch neck-item {
   bottom: -25%; }
 
 animal-item.cow.munch head-item {
-  top: 100%; }
+  top: 80%; }
 
 animal-item.cow.sleep body-item {
   top: 60%; }

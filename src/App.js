@@ -69,7 +69,7 @@ new Pig()
   .go();
 
   new Cow()
-    .setPosition( 45, 75 )
+    .setPosition( 55, 90 )
     .setFace( 225 )
     .setColor()
     .setName( `Betsy` )
@@ -104,7 +104,7 @@ this.barn
 
     var frames = 0;
     this.state = {frames: frames};
-    window.setInterval(() => this.setState({frames: ++frames}), 30)
+    window.setInterval(() => window.requestAnimationFrame(() => this.setState({frames: ++frames})), 30)
   }
 
   render() {
