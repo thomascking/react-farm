@@ -4,12 +4,13 @@ import React, { Component } from 'react';
 class BarnComp extends Component {
   render() {
     const style = {
-      '--size': '20',
-      '--posX': '50',
-      '--posY': '50',
-      '--hue': '0',
-      '--sat': '43',
-      '--lum': '49'
+      '--size': this.props.barn.size,
+      '--posX': this.props.barn.x,
+      '--posY': this.props.barn.y,
+      '--hue': this.props.barn.hue,
+      '--sat': this.props.barn.sat,
+      '--lum': this.props.barn.lum,
+      'zIndex': this.props.barn['z-index']
     }
     return (
       <barn-item style={style}>

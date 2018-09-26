@@ -4,15 +4,15 @@ import React, { Component } from 'react';
 class AnimalComp extends Component {
   render() {
     const style = {
-      '--size': '10',
-      '--posX': this.props.animal.posX,
-      '--posY': this.props.animal.posY,
-      '--hue': '17',
-      '--sat': '82',
-      '--lum': '84'
+      '--size': this.props.animal.size,
+      '--posX': this.props.animal.x,
+      '--posY': this.props.animal.y,
+      '--hue': this.props.animal.hue,
+      '--sat': this.props.animal.sat,
+      '--lum': this.props.animal.lum
     }
     return (
-      <animal-item style={style} class={this.props.animal.animalClass + ' ' + this.props.animal.stance} data-face={this.props.animal.face}>
+      <animal-item style={style} class={[this.props.animal.animalType, this.props.animal.activityClass].join(' ')} data-face={this.props.animal.face}>
       <talk-item></talk-item>
       <body-item>
 
