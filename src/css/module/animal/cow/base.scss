@@ -3,6 +3,9 @@ animal-item.cow {
   height: calc( var(--sizeStatic) * 2 );
   width: calc( var(--sizeStatic) * 2 );
 
+  margin-top: calc( var( --sizeStatic ) * -2 );
+  margin-left: calc( var( --sizeStatic ) * -1 );
+
   --hue: 030;
   --sat: 090%;
   --lum: 085%;
