@@ -11,6 +11,7 @@ import { Barn } from './models/barn/barn';
 import { Emu, emuList } from './models/animal/library/emu';
 import { Pig, pigList } from './models/animal/library/pig';
 import { Alpaca, alpacaList } from './models/animal/library/alpaca';
+import { Cow, cowList } from './models/animal/library/cow';
 import { animalList } from './models/animal/animal';
 import { Turf, turfList } from './models/turf/turf';
 
@@ -66,6 +67,14 @@ new Pig()
   .setName( `Ferdinand` )
   .setBarn( this.barn )
   .go();
+
+  new Cow()
+    .setPosition( 45, 75 )
+    .setFace( 225 )
+    .setColor()
+    .setName( `Betsy` )
+    .setBarn( this.barn )
+    .go();
 
 new Emu()
   .setPosition( 45, 75 )

@@ -8,6 +8,9 @@
 @import './module/animal/alpaca/base.scss';
 @import './module/animal/alpaca/direction.scss';
 
+@import './module/animal/cow/base.scss';
+@import './module/animal/cow/direction.scss';
+
 @import './module/animal/pig/base.scss';
 @import './module/animal/pig/direction.scss';
 
@@ -16,6 +19,7 @@
 
 @import './state/animal/state.scss';
 @import './state/animal/alpaca/state.scss';
+@import './state/animal/cow/state.scss';
 @import './state/animal/pig/state.scss';
 @import './state/animal/emu/state.scss';
 
