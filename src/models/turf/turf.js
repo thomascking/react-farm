@@ -1,11 +1,14 @@
 let { Item } = require( `../item.js` ),
-  turfList = [];
+  turfList = [],
+  id = 0;
 
 class Turf extends Item {
 
   constructor () {
 
     super();
+
+    this.id = id++;
 
     this.setGrowth();
     this.setSize( 2 );

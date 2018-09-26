@@ -99,8 +99,8 @@ this.barn
   }
 
   render() {
-    const animalComp = animalList.map((animal, index) => { return (<AnimalComp key={index} animal={animal} />) });
-    const turfComp = turfList.map((turf, index) => { return (<TurfComp key={index} turf={turf} />) })
+    const animalComp = animalList.map((animal, index) => { return (<AnimalComp key={animal.id} animal={animal} />) });
+    const turfComp = turfList.map((turf, index) => { return (<TurfComp key={turf.id} turf={turf} />) })
     return (
       <div data-frames={this.state.frames}>
         { animalComp }

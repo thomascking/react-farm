@@ -10,7 +10,8 @@ class TurfComp extends Component {
       '--posY': this.props.turf.y,
       '--hue': this.props.turf.hue,
       '--sat': this.props.turf.sat,
-      '--lum': this.props.turf.lum
+      '--lum': this.props.turf.lum,
+      'zIndex': this.props.turf.zIndex
     }
     return (
       <turf-item style={style}></turf-item>

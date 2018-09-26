@@ -9,7 +9,8 @@ class AnimalComp extends Component {
       '--posY': this.props.animal.y,
       '--hue': this.props.animal.hue,
       '--sat': this.props.animal.sat,
-      '--lum': this.props.animal.lum
+      '--lum': this.props.animal.lum,
+      'zIndex': this.props.animal.zIndex
     }
     return (
       <animal-item style={style} class={[this.props.animal.animalType, this.props.animal.activityClass].join(' ')} data-face={this.props.animal.face}>

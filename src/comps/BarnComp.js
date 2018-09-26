@@ -10,7 +10,7 @@ class BarnComp extends Component {
       '--hue': this.props.barn.hue,
       '--sat': this.props.barn.sat,
       '--lum': this.props.barn.lum,
-      'zIndex': this.props.barn['z-index']
+      'zIndex': this.props.barn.zIndex
     }
     return (
       <barn-item style={style}>
